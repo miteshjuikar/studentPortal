@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { addStudent, addMark, fetchAllStudents, fetchStudentsMakrs, updateStudent, deleteStudent } = require('../controller/studentController');
+const { addStudent, addMark, fetchAllStudents, fetchStudentsMakrs, updateStudent, deleteStudent, fetchSingleStudent } = require('../controller/studentController');
 
 const router = express.Router();
 
@@ -9,7 +9,7 @@ router.route("/student")
 .post(addStudent);
 
 router.route("/student/:id")
-.get(fetchStudentsMakrs)
+.get(fetchSingleStudent)
 .put(updateStudent)
 .delete(deleteStudent)
 

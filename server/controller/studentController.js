@@ -127,6 +127,29 @@ const fetchAllStudents =  async (req, res) => {
     }
 }
 
+const fetchSingleStudent = async (req, res) => {
+
+  const studentId = req.params.id; 
+  try {
+    const singleStudent = await Student.findByPk(studentId);
+
+    if (!singleStudent) {
+      return res.status(404).json({ message: 'Student data not found.' });
+    }
+
+    return res.status(200).json({
+      message: 'Student data fetched successfully',
+      data: singleStudent,
+    });
+  } catch (error) {
+    console.error('Error fetching student data:');
+    return res.status(500).json({
+      message: 'Internal server error',
+      error: error.message,
+    });
+  }
+}
+
 const fetchStudentsMakrs = async (req, res) => {
     const studentId = req.params.id; 
   
@@ -237,4 +260,4 @@ const deleteStudent = async (req, res) => {
     }
 }
 
-module.exports = { addStudent, addMark, fetchAllStudents, fetchStudentsMakrs, updateStudent, deleteStudent }
+module.exports = { addStudent, addMark, fetchAllStudents, fetchSingleStudent, fetchStudentsMakrs, updateStudent, deleteStudent }
